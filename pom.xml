@@ -6,7 +6,7 @@
 
     <groupId>io.github.scottconway</groupId>
     <artifactId>tracker-domain</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.4-SNAPSHOT</version>
     <name>tracker-domain</name>
     <description>Domain classes used by the tracker-server and maven plugins.</description>
     <url>https://github.com/ScottConway/tracker-domain</url>
