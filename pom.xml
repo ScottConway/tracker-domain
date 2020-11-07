@@ -6,7 +6,28 @@
 
     <groupId>io.github.scottconway</groupId>
     <artifactId>tracker-domain</artifactId>
-    <version>0.0.3-SNAPSHOT</version>
+    <version>0.0.3</version>
+    <name>tracker-domain</name>
+    <description>Domain classes used by the tracker-server and maven plugins.</description>
+    <url>https://github.com/ScottConway/tracker-domain</url>
+
+    <licenses>
+        <license>
+            <name>Apache 2</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <email>scott.conway@gmail.com</email>
+            <name>Scott Conway</name>
+            <url>https://github.com/ScottConway</url>
+            <id>ScottConway</id>
+        </developer>
+    </developers>
 
     <properties>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -28,8 +49,6 @@
             <version>2.0.1.Final</version>
         </dependency>
     </dependencies>
-
-
     <build>
         <plugins>
             <plugin>
@@ -119,6 +138,72 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <!-- Deploy the web site -->
+                <groupId>com.github.github</groupId>
+                <artifactId>site-maven-plugin</artifactId>
+                <version>0.12</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>site</goal>
+                        </goals>
+                        <!-- select the Maven phase in which the plugin will be executed -->
+                        <phase>site</phase>
+                        <configuration>
+                            <!-- Plugin configuration ges here -->
+
+                            <server>github</server>
+
+                            <!-- The commit message -->
+                            <message>Building site for my project</message>
+                            <!-- Use merge or override the content -->
+                            <merge>true</merge>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${maven.javadoc.version}</version>
+                <configuration>
+                    <doclint>none</doclint>
+                    <source>11</source>
+                    <!--<javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>-->
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>project</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
@@ -198,5 +283,12 @@
             </plugin>
         </plugins>
     </reporting>
+
+    <!-- Change this to point to your repository -->
+    <scm>
+        <url>https://github.com/ScottConway/tracker-domain</url>
+        <connection>scm:git:git@github.com:ScottConway/tracker-domain.git</connection>
+        <developerConnection>scm:git:git@github.com:ScottConway/tracker-domain.git</developerConnection>
+    </scm>
 
 </project>
