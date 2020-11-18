@@ -6,7 +6,7 @@
 
     <groupId>io.github.scottconway</groupId>
     <artifactId>tracker-domain</artifactId>
-    <version>0.0.4</version>
+    <version>0.0.5-SNAPSHOT</version>
     <name>tracker-domain</name>
     <description>Domain classes used by the tracker-server and maven plugins.</description>
     <url>https://github.com/ScottConway/tracker-domain</url>
@@ -290,5 +290,23 @@
         <connection>scm:git:git@github.com:ScottConway/tracker-domain.git</connection>
         <developerConnection>scm:git:git@github.com:ScottConway/tracker-domain.git</developerConnection>
     </scm>
+
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>https://repo1.maven.org/maven2</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>github</id>
+            <name>GitHub OWNER Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/OWNER/REPOSITORY</url>
+        </repository>
+    </repositories>
 
 </project>
