@@ -5,26 +5,25 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * The purpose of BuildSource is to allow the transmitting of who built the project.  Currently the only two
- * supported values are personal (a developer on their personal/work machine), and CI build.
+ * LanguageRoot allows the transmitting of the language that the dependency/project will run on.
  * <p>
- * This allows for the ability in the tracker-server to only save off builds done by the CI system if they are
- * the only builds that are promoted to production but still allow analysis of data from personal builds.
+ * The purpose of this is to allow for future expandability in different languages where two different
+ * languages would have dependencies that have the same name but are actually completely different.
+ * By recording and displaying the language root it is hoped that any confusion will be minimized.
  */
-public enum BuildSource {
-    PERSONAL("personal"),
-    CI("CI,CI Build,Jenkins,Hudson"),
+public enum LanguageRoot {
+    JAVA("java,groovy"),
     UNKNOWN("");
 
     public List<String> sources = new ArrayList<>();
 
-    private BuildSource(String sourceString) {
+    private LanguageRoot(String sourceString) {
         Arrays.stream(sourceString.split(","))
                 .map(String::toUpperCase)
                 .forEach(s -> sources.add(s));
     }
 
-    public static BuildSource valueOfSource(String source) {
+    public static LanguageRoot valueOfSource(String source) {
         if (source == null) {
             return UNKNOWN;
         }
