@@ -16,14 +16,23 @@ public enum BuildSource {
     CI("CI,CI Build,Jenkins,Hudson"),
     UNKNOWN("");
 
-    public List<String> sources = new ArrayList<>();
+    private final List<String> sources = new ArrayList<>();
 
-    private BuildSource(String sourceString) {
+    /**
+     * Internal constructor
+     *
+     * @param sourceString
+     */
+    BuildSource(String sourceString) {
         Arrays.stream(sourceString.split(","))
                 .map(String::toUpperCase)
                 .forEach(s -> sources.add(s));
     }
 
+    /**
+     * @param source - creator of the version.
+     * @return - the BuildSource for the given source string,  UNKNOWN otherwise.
+     */
     public static BuildSource valueOfSource(String source) {
         if (source == null) {
             return UNKNOWN;

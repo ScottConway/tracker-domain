@@ -18,6 +18,7 @@ public class ProjectVersion implements Serializable {
     private boolean versionSunset;
     @PastOrPresent
     private OffsetDateTime createdDateTime;
+    private BuildSource buildSource;
     @NotNull
     private List<Dependency> dependencyList;
 
@@ -90,6 +91,24 @@ public class ProjectVersion implements Serializable {
      */
     public void setCreatedDateTime(OffsetDateTime createdDateTime) {
         this.createdDateTime = createdDateTime;
+    }
+
+    /**
+     * @return the build source for this version.
+     * @see BuildSource
+     */
+    public BuildSource getBuildSource() {
+        return buildSource;
+    }
+
+    /**
+     * Setter for the build source.
+     *
+     * @param buildSource
+     * @see BuildSource
+     */
+    public void setBuildSource(BuildSource buildSource) {
+        this.buildSource = buildSource;
     }
 
     /**

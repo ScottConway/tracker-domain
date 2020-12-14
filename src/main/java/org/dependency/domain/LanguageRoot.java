@@ -15,14 +15,23 @@ public enum LanguageRoot {
     JAVA("java,groovy"),
     UNKNOWN("");
 
-    public List<String> sources = new ArrayList<>();
+    private final List<String> sources = new ArrayList<>();
 
-    private LanguageRoot(String sourceString) {
+    /**
+     * Internal constructor
+     *
+     * @param sourceString
+     */
+    LanguageRoot(String sourceString) {
         Arrays.stream(sourceString.split(","))
                 .map(String::toUpperCase)
                 .forEach(s -> sources.add(s));
     }
 
+    /**
+     * @param source - Name of the language family for which the given project is for.
+     * @return the associated LanguageRoot for the source, UNKNOWN otherwise.
+     */
     public static LanguageRoot valueOfSource(String source) {
         if (source == null) {
             return UNKNOWN;

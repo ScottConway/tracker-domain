@@ -21,6 +21,7 @@ public class Project implements Serializable {
     private boolean projectSunset;
     @NotNull
     private List<ProjectVersion> versionList;
+    private LanguageRoot languageRoot;
 
     /**
      * Default constructor.
@@ -110,12 +111,29 @@ public class Project implements Serializable {
         this.versionList = versionList;
     }
 
+    /**
+     * @return Language root for the project.
+     * @see LanguageRoot
+     */
+    public LanguageRoot getLanguageRoot() {
+        return languageRoot;
+    }
+
+    /**
+     * @param languageRoot - the language root for the project.
+     * @see LanguageRoot
+     */
+    public void setLanguageRoot(LanguageRoot languageRoot) {
+        this.languageRoot = languageRoot;
+    }
+
     @Override
     public String toString() {
         return "Project{" +
-                "id=" + projectId +
+                "projectId=" + projectId +
                 ", groupName='" + groupName + '\'' +
                 ", artifactName='" + artifactName + '\'' +
+                ", languageRoot=" + languageRoot +
                 ", projectSunset=" + projectSunset +
                 ", versionList=" + versionList +
                 '}';
