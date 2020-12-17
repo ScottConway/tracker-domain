@@ -1,6 +1,7 @@
 package org.dependency.util;
 
 import org.dependency.domain.AddProjectVersionRequest;
+import org.dependency.domain.Dependency;
 import org.dependency.domain.Project;
 import org.dependency.domain.ProjectVersion;
 
@@ -34,7 +35,19 @@ public class AddProjectVersionRequestBuilder {
 
     private List<ProjectVersion> buildVersionList(AddProjectVersionRequest request) {
         List<ProjectVersion> versionList = new ArrayList<>();
+        ProjectVersion version = new ProjectVersion();
+        version.setVersion(request.getVersion());
+        version.setBuildSource(request.getBuildSource());
+        version.setCreatedDateTime(request.getCreatedDateTime());
+        version.setVersionSunset(false);
+        version.setDependencyList(buildDependencyList(request));
+        versionList.add(version);
         return versionList;
+    }
+
+    private List<Dependency> buildDependencyList(AddProjectVersionRequest request) {
+        List<Dependency> dependencyList = new ArrayList<>();
+        return dependencyList;
     }
 
     /**
@@ -46,10 +59,16 @@ public class AddProjectVersionRequestBuilder {
      * @see Project
      */
     public AddProjectVersionRequest buildAddProjectVersionRequest(Project project) {
+        ProjectVersion version = project.getVersionList().get(0);
+
         AddProjectVersionRequest request = new AddProjectVersionRequest()
                 .withGroupName(project.getGroupName())
                 .withArtifactName(project.getArtifactName())
-                .withLanguageRoot(project.getLanguageRoot());
+                .withLanguageRoot(project.getLanguageRoot())
+                .withVersion(version.getVersion())
+                .withCreatedDateTime(version.getCreatedDateTime())
+                .withBuildSource(version.getBuildSource());
+
         return request;
     }
 }

@@ -2,6 +2,7 @@ package org.dependency.domain;
 
 
 import java.io.Serializable;
+import java.time.OffsetDateTime;
 import java.util.Objects;
 
 /**
@@ -17,6 +18,9 @@ public class AddProjectVersionRequest implements Serializable {
     private String groupName;
     private String artifactName;
     private LanguageRoot languageRoot;
+    private String version;
+    private OffsetDateTime createdDateTime;
+    private BuildSource buildSource;
 
     /**
      * default constructor
@@ -47,6 +51,31 @@ public class AddProjectVersionRequest implements Serializable {
      */
     public LanguageRoot getLanguageRoot() {
         return languageRoot;
+    }
+
+    /**
+     * @return the version being built
+     * @see ProjectVersion#getVersion()
+     */
+    public String getVersion() {
+        return version;
+    }
+
+    /**
+     * @return the date/time of the build.
+     * @see ProjectVersion#getCreatedDateTime()
+     */
+    public OffsetDateTime getCreatedDateTime() {
+        return createdDateTime;
+    }
+
+    /**
+     * @return the source of the build.
+     * @see ProjectVersion#getBuildSource()
+     * @see BuildSource
+     */
+    public BuildSource getBuildSource() {
+        return buildSource;
     }
 
     /**
@@ -82,12 +111,48 @@ public class AddProjectVersionRequest implements Serializable {
         return this;
     }
 
+    /**
+     * A setter for the version
+     *
+     * @param version
+     * @return this
+     */
+    public AddProjectVersionRequest withVersion(String version) {
+        this.version = version;
+        return this;
+    }
+
+    /**
+     * A setter for the createdDateTime
+     *
+     * @param createdDateTime
+     * @return this
+     */
+    public AddProjectVersionRequest withCreatedDateTime(OffsetDateTime createdDateTime) {
+        this.createdDateTime = createdDateTime;
+        return this;
+    }
+
+    /**
+     * A setter for the buildSource
+     *
+     * @param buildSource
+     * @return this
+     */
+    public AddProjectVersionRequest withBuildSource(BuildSource buildSource) {
+        this.buildSource = buildSource;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "AddProjectVersionRequest{" +
                 "groupName='" + groupName + '\'' +
                 ", artifactName='" + artifactName + '\'' +
                 ", languageRoot=" + languageRoot +
+                ", version='" + version + '\'' +
+                ", createdDateTime=" + createdDateTime +
+                ", buildSource=" + buildSource +
                 '}';
     }
 
@@ -100,11 +165,11 @@ public class AddProjectVersionRequest implements Serializable {
             return false;
         }
         AddProjectVersionRequest request = (AddProjectVersionRequest) o;
-        return Objects.equals(groupName, request.groupName) && Objects.equals(artifactName, request.artifactName) && languageRoot == request.languageRoot;
+        return Objects.equals(groupName, request.groupName) && Objects.equals(artifactName, request.artifactName) && languageRoot == request.languageRoot && Objects.equals(version, request.version) && Objects.equals(createdDateTime, request.createdDateTime) && buildSource == request.buildSource;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(groupName, artifactName, languageRoot);
+        return Objects.hash(groupName, artifactName, languageRoot, version, createdDateTime, buildSource);
     }
 }
