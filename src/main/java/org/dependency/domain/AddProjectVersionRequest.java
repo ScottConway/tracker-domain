@@ -3,13 +3,15 @@ package org.dependency.domain;
 
 import java.io.Serializable;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
  * This is the request class that will go between the build plugin (initially just the dependency-tracker-maven-plugin)
  * and the tracker-server.
  * <p>
- * This is basically a flattened version of the Project with no enforcement on the completeness.   This is because I
+ * This is basically a flattened (flatter) version of the Project with no enforcement on the completeness.   This is because I
  * realized in writing this that different languages may different rules in what is required for a dependency.   So I
  * am opting for an simpler request and will have the plugin guarantee completeness/correctness instead of the
  * Project/ProjectVersion/Dependency classes themselves.
@@ -21,11 +23,13 @@ public class AddProjectVersionRequest implements Serializable {
     private String version;
     private OffsetDateTime createdDateTime;
     private BuildSource buildSource;
+    List<Dependency> dependencyList;
 
     /**
      * default constructor
      */
     public AddProjectVersionRequest() {
+        dependencyList = new ArrayList<>();
     }
 
     /**
@@ -153,6 +157,7 @@ public class AddProjectVersionRequest implements Serializable {
                 ", version='" + version + '\'' +
                 ", createdDateTime=" + createdDateTime +
                 ", buildSource=" + buildSource +
+                ", dependencyList=" + dependencyList +
                 '}';
     }
 
@@ -165,11 +170,11 @@ public class AddProjectVersionRequest implements Serializable {
             return false;
         }
         AddProjectVersionRequest request = (AddProjectVersionRequest) o;
-        return Objects.equals(groupName, request.groupName) && Objects.equals(artifactName, request.artifactName) && languageRoot == request.languageRoot && Objects.equals(version, request.version) && Objects.equals(createdDateTime, request.createdDateTime) && buildSource == request.buildSource;
+        return Objects.equals(groupName, request.groupName) && Objects.equals(artifactName, request.artifactName) && languageRoot == request.languageRoot && Objects.equals(version, request.version) && Objects.equals(createdDateTime, request.createdDateTime) && buildSource == request.buildSource && Objects.equals(dependencyList, request.dependencyList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(groupName, artifactName, languageRoot, version, createdDateTime, buildSource);
+        return Objects.hash(groupName, artifactName, languageRoot, version, createdDateTime, buildSource, dependencyList);
     }
 }

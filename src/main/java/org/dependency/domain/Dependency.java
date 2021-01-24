@@ -2,6 +2,7 @@ package org.dependency.domain;
 
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Currently this is the dependency information of an artifact as stored in the database.
@@ -125,5 +126,34 @@ public class Dependency implements Serializable {
      */
     public void setScope(String scope) {
         this.scope = scope;
+    }
+
+    @Override
+    public String toString() {
+        return "Dependency{" +
+                "dependencyId=" + dependencyId +
+                ", groupName='" + groupName + '\'' +
+                ", artifactName='" + artifactName + '\'' +
+                ", dependencyVersion='" + dependencyVersion + '\'' +
+                ", type='" + type + '\'' +
+                ", scope='" + scope + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Dependency)) {
+            return false;
+        }
+        Dependency that = (Dependency) o;
+        return dependencyId == that.dependencyId && Objects.equals(groupName, that.groupName) && Objects.equals(artifactName, that.artifactName) && Objects.equals(dependencyVersion, that.dependencyVersion) && Objects.equals(type, that.type) && Objects.equals(scope, that.scope);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(dependencyId, groupName, artifactName, dependencyVersion, type, scope);
     }
 }
